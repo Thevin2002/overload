@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  /* calm neutrals */
+  --color-ink-50: #f6f7f9;
+  --color-ink-100: #eceef2;
+  --color-ink-200: #d9dde4;
+  --color-ink-300: #b8bfcb;
+  --color-ink-400: #8b94a3;
+  --color-ink-500: #667082;
+  --color-ink-600: #4b5465;
+  --color-ink-700: #333a47;
+  --color-ink-800: #1d232c;
+  --color-ink-850: #161b22;
+  --color-ink-900: #0c1117;
+
+  /* accent: muted teal */
+  --color-brand-50: #e9f8f5;
+  --color-brand-100: #c9eee6;
+  --color-brand-300: #6fd0bd;
+  --color-brand-400: #3fbca5;
+  --color-brand-500: #1fa28b;
+  --color-brand-600: #168370;
+  --color-brand-700: #13695b;
+}
+
+:root {
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+  /* chart tokens (validated: contrast ≥ 3:1 on both surfaces) */
+  --series-1: #2a78d6;
+  --goal: #52514e;
+  --chart-grid: #e6e8ec;
+  --chart-text: #667082;
+  --chart-surface: #ffffff;
+}
+:root.dark {
+  color-scheme: dark;
+  --series-1: #3987e5;
+  --goal: #c3c2b7;
+  --chart-grid: #262d37;
+  --chart-text: #8b94a3;
+  --chart-surface: #161b22;
+}
+
+html,
+body {
+  background: var(--color-ink-50);
+  color: var(--color-ink-900);
+  overscroll-behavior-y: none;
+}
+.dark body,
+:root.dark body {
+  background: var(--color-ink-900);
+  color: var(--color-ink-100);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide number spinners; we use our own +/- buttons. */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-sheet {
+  animation: sheet-in 160ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheet {
+    animation: none;
+  }
+}
